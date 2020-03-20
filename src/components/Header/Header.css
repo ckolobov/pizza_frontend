@@ -1,0 +1,21 @@
+.header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.header__logo {
+    color: darkred;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 38px;
+}
+
+.header__logo:hover {
+    color: red;
+}
+
+.btn-group {
+    margin-right: 10px;
+}
