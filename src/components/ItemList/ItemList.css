@@ -1,0 +1,25 @@
+.itemList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.itemList__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 10px;
+    width: calc(33.3% - 10px);
+    min-height: 50px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+.itemList__item .img {
+    height: 200px;
+}
+
+.itemList__item .price {
+    font-size: 20px;
+    line-height: 40px;
+}

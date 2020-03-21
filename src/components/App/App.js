@@ -3,6 +3,7 @@ import './App.css';
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import ItemList from "../ItemList/ItemList";
 
 const App = () => {
     return (
@@ -10,7 +11,7 @@ const App = () => {
             <Header />
             <main className="main">
                 <div className="randomItem"></div>
-                <div className="itemList"></div>
+                <ItemList />
             </main>
             <Footer />
         </div>
