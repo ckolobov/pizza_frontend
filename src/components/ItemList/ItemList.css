@@ -15,11 +15,11 @@
     border-radius: 5px;
     background-color: #ffffff;
 }
-.itemList__item .img {
-    height: 200px;
+.itemList__item .itemImage {
+    margin-right: -10px;
 }
 
-.itemList__item .price {
+.itemList__item .itemPrice {
     font-size: 20px;
     line-height: 40px;
 }

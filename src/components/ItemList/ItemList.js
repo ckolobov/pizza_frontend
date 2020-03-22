@@ -1,6 +1,8 @@
 import React from "react";
 import './ItemList.css';
 
+import images from './images'
+
 export default class ItemList extends React.Component {
 
     state = {
@@ -53,9 +55,9 @@ export default class ItemList extends React.Component {
 
             return (
                 <div className="itemList__item" key={id}>
-                    <div className="img"></div>
-                    <div className="name">{name}</div>
-                    <div className="price">$ {price}</div>
+                    <img className="itemImage" src={images[id-1].src} alt={name} title={name}/>
+                    <div className="itemName">{name}</div>
+                    <div className="itemPrice">$ {price}</div>
                     <button type="button" className="btn btn-success">Add to Quote</button>
                 </div>
             )
