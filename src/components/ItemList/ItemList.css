@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 0 -5px;
 }
 
 .itemList__item {
@@ -22,4 +23,16 @@
 .itemList__item .itemPrice {
     font-size: 20px;
     line-height: 40px;
+}
+
+@media (max-width: 575.98px) {
+    .itemList__item {
+        width: 100%;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .itemList__item {
+        width: calc(50% - 10px);
+    }
 }

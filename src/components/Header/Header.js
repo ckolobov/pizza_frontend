@@ -1,7 +1,7 @@
 import React from "react";
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onCartBtnClick }) => {
     return (
         <header className="header">
             <a className="header__logo" href="#">Superr Pizza</a>
@@ -10,7 +10,12 @@ const Header = () => {
                     <button type="button" className="btn btn-secondary">Login</button>
                     <button type="button" className="btn btn-secondary">Register</button>
                 </div>
-                <button type="button" className="btn btn-primary">Cart</button>
+                <button type="button"
+                        className="btn btn-primary"
+                        onClick={onCartBtnClick}
+                >
+                    Cart
+                </button>
             </div>
         </header>
     )

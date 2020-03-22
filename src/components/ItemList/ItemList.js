@@ -52,13 +52,20 @@ export default class ItemList extends React.Component {
 
         const items = this.state.data.map(( item ) => {
             const { id, name, price } = item;
+            const image = images.find(img => img.id === id);
 
             return (
                 <div className="itemList__item" key={id}>
-                    <img className="itemImage" src={images[id-1].src} alt={name} title={name}/>
+                    <img className="itemImage" src={image.src} alt={name} title={name}/>
                     <div className="itemName">{name}</div>
                     <div className="itemPrice">$ {price}</div>
-                    <button type="button" className="btn btn-success">Add to Quote</button>
+                    <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={() => {this.props.onAddToCart(id, name, price)}}
+                    >
+                        Add to Cart
+                    </button>
                 </div>
             )
         });

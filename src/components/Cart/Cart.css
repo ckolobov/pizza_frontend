@@ -1,0 +1,36 @@
+.cart {
+    width: 100%;
+}
+
+.cart__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.cart__item .itemName {
+    width: 20%;
+}
+
+.cart__item .itemPrice {
+    width: 20%;
+}
+.cart__item .itemAmount {
+    width: 20%;
+}
+.cart__item .itemSum {
+    flex-grow: 1;
+}
+
+.cart__item .itemBtnTitle {
+    width: 82px;
+}
+
+.confirmOrderForm__input{
+    margin-right: 10px;
+}
