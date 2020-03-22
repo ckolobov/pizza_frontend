@@ -12,7 +12,7 @@ import DummyPizzaService from "../../services/DummyPizzaService";
 export default class App extends React.Component {
 
     state = {
-        pizzaService: new DummyPizzaService(),
+        pizzaService: new PizzaService(),
         showCart: false,
         inCart: null,
         total: 0
