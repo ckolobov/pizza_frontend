@@ -67,6 +67,11 @@ export default class DummyPizzaService {
 
     ];
 
+    postOrder = async (data) => {
+        console.log(data);
+        console.log(JSON.stringify(data));
+    };
+
 
     getAllPizzas = async () => {
         return this._pizzas;

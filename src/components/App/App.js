@@ -12,7 +12,7 @@ import DummyPizzaService from "../../services/DummyPizzaService";
 export default class App extends React.Component {
 
     state = {
-        pizzaService: new PizzaService(),
+        pizzaService: new DummyPizzaService(),
         showCart: false,
         inCart: null,
         total: 0
@@ -81,8 +81,13 @@ export default class App extends React.Component {
 
     render() {
         const cart = this.state.showCart ?
-            <Cart data={this.state.inCart} total={this.state.total} onRemoveFromCart={this.onRemoveFromCart}/> :
-            null;
+            <Cart
+                data={this.state.inCart}
+                total={this.state.total}
+                onRemoveFromCart={this.onRemoveFromCart}
+                postOrder={this.state.pizzaService.postOrder}
+            />
+            : null;
 
         return (
             <div className="container pageContainer">

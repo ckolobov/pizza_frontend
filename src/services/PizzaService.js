@@ -26,4 +26,22 @@ export default class PizzaService {
             image: pizza.image,
         }
     };
+
+    postOrder = async (data) => {
+        return await this.postResource(`/order/`, data);
+    };
+
+    postResource = async (url, data) => {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, received ${res.status}`);
+        }
+        return res;
+    };
+
+
 };
