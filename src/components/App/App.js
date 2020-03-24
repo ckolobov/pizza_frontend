@@ -12,10 +12,11 @@ import DummyPizzaService from "../../services/DummyPizzaService";
 export default class App extends React.Component {
 
     state = {
-        pizzaService: new DummyPizzaService(),
+        pizzaService: new PizzaService(),
+        showLoginBtn: false,
         showCart: false,
         inCart: null,
-        total: 0
+        total: 2
     };
 
     onCartBtnClick = () => {
@@ -33,7 +34,7 @@ export default class App extends React.Component {
             if (!inCart) {
                 return {
                     inCart: [{id: id, name: name, price: price, amount: 1}],
-                    total: priceNum
+                    total: total + priceNum
                 }
             }
 
@@ -91,10 +92,9 @@ export default class App extends React.Component {
 
         return (
             <div className="container pageContainer">
-                <Header onCartBtnClick={this.onCartBtnClick} />
+                <Header onCartBtnClick={this.onCartBtnClick} showLogin={this.showLoginBtn}/>
                 {cart}
                 <main className="main">
-                    <div className="randomItem"></div>
                     <ItemList getData={this.state.pizzaService.getAllPizzas} onAddToCart={this.onAddToCart}/>
                 </main>
                 <Footer />

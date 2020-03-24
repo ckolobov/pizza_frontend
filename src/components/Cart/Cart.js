@@ -6,6 +6,7 @@ export default class Cart extends React.Component {
     state = {
         client_name: '',
         client_phone: '',
+        client_address: '',
         loading: false,
         error: false,
         confirmed: false
@@ -13,23 +14,23 @@ export default class Cart extends React.Component {
 
     onSubmit = (evt) => {
         evt.preventDefault();
+        const { client_name, client_phone, client_address } = this.state;
         this.setState({
             loading: true
         });
         this.props.postOrder({
-            client_name: this.state.client_name,
-            client_phone: this.state.client_phone,
+            client_name: client_name,
+            client_phone: client_phone,
+            client_address: client_address,
             order_data: this.props.data
         })
-            .then((data) => {
-                console.log(data);
+            .then(() => {
                 this.setState({
                     loading: false,
                     confirmed: true
                 });
             })
-            .catch((e) => {
-                console.log(e);
+            .catch(() => {
                 this.setState({
                     loading: false,
                     error: true
@@ -38,6 +39,7 @@ export default class Cart extends React.Component {
         this.setState({
             client_name: '',
             client_phone: '',
+            client_address: ''
         });
     };
 
@@ -50,6 +52,12 @@ export default class Cart extends React.Component {
     onClientPhoneChange = (evt) => {
         this.setState({
             client_phone: evt.target.value
+        })
+    };
+
+    onClientAddressChange = (evt) => {
+        this.setState({
+            client_address: evt.target.value
         })
     };
 
@@ -66,15 +74,17 @@ export default class Cart extends React.Component {
             return (
                 <div className="cart__item" key={id}>
                     <div className="itemName">{name}</div>
-                    <div className="itemPrice">$ {price}</div>
+                    <div className="itemPrice">€ {price} $ {(price * 1.1).toFixed(2)}</div>
                     <div className="itemAmount">{amount}</div>
-                    <div className="itemSum">$ {(price * amount).toFixed(2)}</div>
+                    <div className="itemSum">
+                        € {(price * amount).toFixed(2)} $ {(price * amount * 1.1).toFixed(2)}
+                    </div>
                     <button type="button" className="btn btn-danger" onClick={() => {onRemoveFromCart(id)}}>Remove</button>
                 </div>
             )
         });
 
-        const { confirmed, loading, error, client_name, client_phone} = this.state;
+        const { confirmed, loading, error, client_name, client_phone, client_address } = this.state;
 
         const loadingMsg = loading ? <div className="alert alert-info" role="alert">Loading ...</div> : null;
         const errorMsg = (!loading && error) ? <div className="alert alert-danger" role="alert">Error occured. Your order not confirmed!</div> : null;
@@ -88,12 +98,21 @@ export default class Cart extends React.Component {
                        onChange={this.onClientNameChange}
                        placeholder="Name"
                        value={client_name}
+                       required
                 />
                 <input type="tel"
                        className="form-control confirmOrderForm__input"
                        onChange={this.onClientPhoneChange}
                        placeholder="Phone"
                        value={client_phone}
+                       required
+                />
+                <input type="text"
+                       className="form-control confirmOrderForm__input"
+                       onChange={this.onClientAddressChange}
+                       placeholder="Delivery Address"
+                       value={client_address}
+                       required
                 />
                 <button type="submit"
                         className="btn btn btn-outline-primary"
@@ -113,7 +132,10 @@ export default class Cart extends React.Component {
                 </div>
                 {items}
                 <div className="cart__item">
-                    <div className="itemSum">Total: $ {total.toFixed(2)}</div>
+                    <div className="itemSum">Delivery: € 2 $ 2.20 </div>
+                </div>
+                <div className="cart__item">
+                    <div className="itemSum">Total: € {total.toFixed(2)} $ {(total * 1.1).toFixed(2)}</div>
                 </div>
                 {loadingMsg}
                 {errorMsg}

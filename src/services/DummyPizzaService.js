@@ -20,7 +20,7 @@ export default class DummyPizzaService {
             id: 3,
             name: 'Chicken BBQ',
             description: 'Bbq sauce, red onions, bacon, mozzarella, chicken, marinara sauce',
-            price: '10.30',
+            price: '10.50',
             image: 'bbq.jpg'
         },
 

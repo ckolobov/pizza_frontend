@@ -58,7 +58,7 @@ export default class ItemList extends React.Component {
                 <div className="itemList__item" key={id}>
                     <img className="itemImage" src={image.src} alt={name} title={name}/>
                     <div className="itemName">{name}</div>
-                    <div className="itemPrice">$ {price}</div>
+                    <div className="itemPrice">€ {price} $ {(price * 1.1).toFixed(2)}</div>
                     <button
                         type="button"
                         className="btn btn-success"
