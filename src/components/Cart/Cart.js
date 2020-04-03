@@ -62,7 +62,7 @@ export default class Cart extends React.Component {
     };
 
     render() {
-        const { data, total, onRemoveFromCart } = this.props;
+        const { data, totalPrice, onRemoveFromCart } = this.props;
 
         if (!data || data.length === 0) {
             return <div className="cart__item">The cart is empty!</div>
@@ -135,7 +135,7 @@ export default class Cart extends React.Component {
                     <div className="itemSum">Delivery: € 2 $ 2.20 </div>
                 </div>
                 <div className="cart__item">
-                    <div className="itemSum">Total: € {total.toFixed(2)} $ {(total * 1.1).toFixed(2)}</div>
+                    <div className="itemSum">Total: € {totalPrice.toFixed(2)} $ {(totalPrice * 1.1).toFixed(2)}</div>
                 </div>
                 {loadingMsg}
                 {errorMsg}

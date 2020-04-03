@@ -12,11 +12,12 @@ import DummyPizzaService from "../../services/DummyPizzaService";
 export default class App extends React.Component {
 
     state = {
-        pizzaService: new PizzaService(),
+        pizzaService: new DummyPizzaService(),
         showLoginBtn: false,
         showCart: false,
         inCart: null,
-        total: 2
+        totalPrice: 2,
+        totalAmount: 0
     };
 
     onCartBtnClick = () => {
@@ -28,13 +29,14 @@ export default class App extends React.Component {
     };
 
     onAddToCart = (id, name, price) => {
-        this.setState(({ inCart, total }) => {
+        this.setState(({ inCart, totalPrice, totalAmount }) => {
             const priceNum = parseFloat(price);
 
             if (!inCart) {
                 return {
                     inCart: [{id: id, name: name, price: price, amount: 1}],
-                    total: total + priceNum
+                    totalPrice: totalPrice + priceNum,
+                    totalAmount: totalAmount + 1
                 }
             }
 
@@ -43,7 +45,8 @@ export default class App extends React.Component {
             if (idx === -1) {
                 return {
                     inCart: [...inCart, {id: id, name: name, price: price, amount: 1}],
-                    total: total + priceNum
+                    totalPrice: totalPrice + priceNum,
+                    totalAmount: totalAmount + 1
                 }
             } else {
                 const oldItem = inCart[idx];
@@ -51,7 +54,8 @@ export default class App extends React.Component {
 
                 return {
                     inCart: [...inCart.slice(0, idx), newItem, ...inCart.slice(idx + 1)],
-                    total: total + priceNum
+                    totalPrice: totalPrice + priceNum,
+                    totalAmount: totalAmount + 1
                 }
             }
 
@@ -59,7 +63,7 @@ export default class App extends React.Component {
     };
 
     onRemoveFromCart = (id) => {
-        this.setState(({ inCart, total }) => {
+        this.setState(({ inCart, totalPrice, totalAmount }) => {
             const idx = inCart.findIndex((el) => el.id === id);
             const oldItem = inCart[idx];
             const priceNum = parseFloat(oldItem.price);
@@ -68,12 +72,14 @@ export default class App extends React.Component {
                 const newItem = {...oldItem, amount: oldItem['amount'] - 1};
                 return {
                     inCart: [...inCart.slice(0, idx), newItem, ...inCart.slice(idx + 1)],
-                    total: total - priceNum
+                    totalPrice: totalPrice - priceNum,
+                    totalAmount: totalAmount - 1
                 }
             } else {
                 return {
                     inCart: [...inCart.slice(0, idx), ...inCart.slice(idx + 1)],
-                    total: total - priceNum
+                    totalPrice: totalPrice - priceNum,
+                    totalAmount: totalAmount - 1
                 }
             }
 
@@ -84,7 +90,7 @@ export default class App extends React.Component {
         const cart = this.state.showCart ?
             <Cart
                 data={this.state.inCart}
-                total={this.state.total}
+                totalPrice={this.state.totalPrice}
                 onRemoveFromCart={this.onRemoveFromCart}
                 postOrder={this.state.pizzaService.postOrder}
             />
@@ -92,7 +98,7 @@ export default class App extends React.Component {
 
         return (
             <div className="container pageContainer">
-                <Header onCartBtnClick={this.onCartBtnClick} showLogin={this.showLoginBtn}/>
+                <Header onCartBtnClick={this.onCartBtnClick} showLogin={this.showLoginBtn} totalAmount={this.state.totalAmount}/>
                 {cart}
                 <main className="main">
                     <ItemList getData={this.state.pizzaService.getAllPizzas} onAddToCart={this.onAddToCart}/>
